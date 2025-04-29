@@ -7,20 +7,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Pemilihan Ketua OMK Kronggahan</h1>
-        <div id="question-container" class="question-container">
+    <div id="intro" class="fullscreen">
+        <h1>PEMILIHAN KETUA OMK KRONGGAHAN</h1>
+        <button id="start-button">Mulai</button>
+        <div id="music-toggle" class="music-icon">🔊</div>
+        <audio id="background-music" loop muted>
+            <source src="music.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div id="form-container" class="hidden">
+        <div id="question-card" class="question-card">
             <div id="question"></div>
             <div id="input-container"></div>
             <button id="next-button" class="hidden">Next</button>
         </div>
-        <div id="thank-you" class="hidden">Terima kasih telah mengisi form ini.</div>
     </div>
-    <audio id="background-music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <button id="music-toggle">Play Music</button>
+
+    <div id="thank-you" class="hidden">Terima kasih telah mengisi form ini.</div>
+
     <script src="script.js"></script>
 </body>
 </html>
