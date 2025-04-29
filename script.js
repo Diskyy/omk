@@ -7,7 +7,8 @@ const questions = [
 
 let currentQuestion = 0;
 
-const questionContainer = document.getElementById('question-container');
+const intro = document.getElementById('intro');
+const formContainer = document.getElementById('form-container');
 const questionElement = document.getElementById('question');
 const inputContainer = document.getElementById('input-container');
 const nextButton = document.getElementById('next-button');
@@ -15,14 +16,25 @@ const thankYouMessage = document.getElementById('thank-you');
 const musicToggle = document.getElementById('music-toggle');
 const backgroundMusic = document.getElementById('background-music');
 
+document.getElementById('start-button').addEventListener('click', startQuiz);
+nextButton.addEventListener('click', nextQuestion);
+musicToggle.addEventListener('click', toggleMusic);
+
+function startQuiz() {
+    intro.classList.add('hidden');
+    formContainer.classList.remove('hidden');
+    showQuestion();
+}
+
 function showQuestion() {
-    questionElement.innerText = questions[currentQuestion];
-    inputContainer.innerHTML = '';
+    questionElement.textContent = questions[currentQuestion];
+    inputContainer.innerHTML = ''; // Clear previous input
 
     if (currentQuestion < 3) {
         inputContainer.innerHTML = '<textarea></textarea>';
         nextButton.classList.remove('hidden');
     } else {
+        // Question 4
         inputContainer.innerHTML = `
             <button id="ready-button">Siap</button>
             <button id="not-ready-button">Tidak</button>
@@ -30,6 +42,29 @@ function showQuestion() {
         nextButton.classList.add('hidden');
         document.getElementById('not-ready-button').addEventListener('click', moveButton);
         document.getElementById('ready-button').addEventListener('click', showThankYou);
+    }
+
+    document.querySelector('.question-card').classList.add('show');
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        formContainer.classList.add('hidden');
+        thankYouMessage.classList.remove('hidden');
+    }
+}
+
+function toggleMusic() {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        backgroundMusic.muted = false;
+        musicToggle.textContent = '🔇'; // Change icon to mute
+    } else {
+        backgroundMusic.pause();
+        musicToggle.textContent = '🔊'; // Change icon to unmute
     }
 }
 
@@ -42,14 +77,7 @@ function moveButton() {
     button.style.top = `${randomY}vh`;
 }
 
-nextButton.addEventListener('click', () => {
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-        showQuestion();
-    } else {
-        showThankYou();
-    }
-});
-
 function showThankYou() {
-    question
+    formContainer.classList.add('hidden');
+    thankYouMessage.classList.remove('hidden');
+}
