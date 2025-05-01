@@ -1,32 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemilihan Ketua OMK Kronggahan</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OMK SanMarKro ✝️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      overflow: hidden; color: #222;
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5em; margin: 60px auto 30px;
+      color: #fff; text-shadow: 2px 2px 8px #555;
+      animation: fadeInDown 2s ease-out forwards;
+    }
+    .start-screen, .container, .extra-question {
+      text-align: center;
+      transition: all 0.8s ease-in-out;
+      max-width: 600px; margin: auto;
+    }
+    .container { display: none; background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.2); }
+    form { display: flex; flex-direction: column; gap: 20px; animation: fadeInUp 0.8s ease forwards; }
+    label { text-align: left; font-weight: 600; }
+    input, textarea {
+      padding: 12px; border-radius: 10px; border: 1px solid #ccc; font-size: 1em; width: 100%; transition: 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: #6a5acd; outline: none;
+      box-shadow: 0 0 10px rgba(106, 90, 205, 0.4);
+    }
+    button {
+      padding: 12px 24px;
+      background: linear-gradient(45deg, #6a5acd, #836fff);
+      color: white; border: none; border-radius: 50px;
+      cursor: pointer; font-size: 1em; font-weight: bold;
+      animation: glow 2s infinite; transition: transform 0.3s ease;
+    }
+    button:hover { transform: scale(1.05); }
+    .hidden { display: none; }
+    audio { display: none; }
+
+    @keyframes fadeInDown { 0% { opacity: 0; transform: translateY(-50px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes glow { 0% { box-shadow: 0 0 10px #836fff; } 50% { box-shadow: 0 0 20px #836fff; } 100% { box-shadow: 0 0 10px #836fff; } }
+
+    .floating { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+    .floating span {
+      position: absolute; display: block;
+      font-size: 2rem; animation: float 15s linear infinite;
+      color: #ffffff88;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+    }
+
+    .motivasi {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin: 25px auto;
+      animation: fadeZoom 2s ease-in-out, pulse 3s infinite;
+      background: linear-gradient(45deg, #6a5acd, #ff6ec4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    @keyframes fadeZoom {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+  </style>
 </head>
 <body>
-    <div id="intro" class="fullscreen">
-        <h1>PEMILIHAN KETUA OMK KRONGGAHAN</h1>
-        <button id="start-button">Mulai</button>
-        <div id="music-toggle" class="music-icon">🔊</div>
-        <audio id="background-music" loop muted>
-            <source src="music.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+  <div class="floating">
+    <span style="left: 5%; animation-delay: 0s;">✝️</span>
+    <span style="left: 20%; animation-delay: 2s;">✝️</span>
+    <span style="left: 40%; animation-delay: 4s;">✝️</span>
+    <span style="left: 60%; animation-delay: 1s;">✝️</span>
+    <span style="left: 80%; animation-delay: 3s;">✝️</span>
+  </div>
+
+  <h1>OMK SanMarKro</h1>
+
+  <div class="start-screen">
+    <button id="startBtn">🎵 Mulai</button>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung pemutar audio.
+  </audio>
+
+  <div id="formContainer" class="container">
+    <form id="formFull" action="https://formspree.io/f/mdkgaqja" method="POST">
+      <div id="step1">
+        <label>Nama Lengkap:
+          <input type="text" name="nama" required>
+        </label>
+        <button type="button" onclick="nextStep(1)">Lanjut ✨</button>
+      </div>
+
+      <div id="step2" class="hidden">
+        <label>Menurutmu siapa yang cocok menjadi calon ketua OMK?
+          <input type="text" name="calon" required>
+        </label>
+        <button type="button" onclick="nextStep(2)">Lanjut ➡️</button>
+      </div>
+
+      <div id="step3" class="hidden">
+        <label>Mengapa kamu memilih dia?
+          <textarea name="alasan" required></textarea>
+        </label>
+        <input type="hidden" name="_subject" value="Pemilihan Ketua OMK">
+        <button type="button" onclick="showExtra()">Lanjutkan 🙌</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="extraQuestion" class="extra-question hidden">
+    <div class="motivasi">
+      "Janganlah takut, sebab Aku menyertai engkau."<br><em>- Yesaya 41:10</em>
     </div>
+    <h2>Jika kamu terpilih menjadi calon ketua, apakah kamu siap?</h2>
+    <button id="yesBtn" onclick="submitForm()">Siap Bangett!!</button>
+    <button id="noBtn" onclick="moveNoBtn()">Mungkin lain waktu</button>
+  </div>
 
-    <div id="form-container" class="hidden">
-        <div id="question-card" class="question-card">
-            <div id="question"></div>
-            <div id="input-container"></div>
-            <button id="next-button" class="hidden">Next</button>
-        </div>
-    </div>
+<script>
+  const startBtn = document.getElementById('startBtn');
+  const bgMusic = document.getElementById('bgMusic');
+  const formContainer = document.getElementById('formContainer');
+  const extraQuestion = document.getElementById('extraQuestion');
+  const noBtn = document.getElementById('noBtn');
+  let moveCount = 0;
 
-    <div id="thank-you" class="hidden">Terima kasih telah mengisi form ini.</div>
+  startBtn.addEventListener('click', () => {
+    bgMusic.play();
+    document.querySelector('.start-screen').style.display = 'none';
+    formContainer.style.display = 'block';
+  });
 
-    <script src="script.js"></script>
+  function nextStep(current) {
+    const input = document.querySelector(`#step${current} input, #step${current} textarea`);
+    if (!input.value.trim()) {
+      alert('Isi dulu dong kak 😅');
+      return;
+    }
+    if (input.value.trim().length < 3) {
+      alert('Isi yang bener dongg 😝');
+      return;
+    }
+
+    document.getElementById(`step${current}`).classList.add('hidden');
+    document.getElementById(`step${current + 1}`).classList.remove('hidden');
+  }
+
+  function showExtra() {
+    const input = document.querySelector(`#step3 textarea`);
+    if (!input.value.trim()) {
+      alert('Isi dulu dong kak 😅');
+      return;
+    }
+    if (input.value.trim().length < 3) {
+      alert('Isi yang bener dongg 😝');
+      return;
+    }
+
+    formContainer.style.display = 'none';
+    extraQuestion.classList.remove('hidden');
+  }
+
+  function submitForm() {
+    document.getElementById('formFull').submit();
+  }
+
+  function moveNoBtn() {
+    if (moveCount < 5) {
+      noBtn.style.position = 'relative';
+      noBtn.style.left = Math.random() * 200 - 100 + 'px';
+      noBtn.style.top = Math.random() * 100 - 50 + 'px';
+      moveCount++;
+    } else {
+      noBtn.textContent = 'Oke aku siap!!!';
+      noBtn.onclick = submitForm;
+    }
+  }
+</script>
+
+  </script>
 </body>
 </html>
